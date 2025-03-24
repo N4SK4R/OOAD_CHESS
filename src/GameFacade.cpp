@@ -16,10 +16,8 @@ void GameFacade::ProcessInput() {
             if(selectedPiece.x == -1) { 
 
                 Piece* piece = board.GetPiece(boardPos);
-                if(piece !=nullptr && piece->GetType() == PieceType::ROOK) {
-                    selectedPiece = boardPos;
-                    std::cout << "Selected rook at (" << selectedPiece.x << ", " << selectedPiece.y << ")" << std::endl;
-                }
+                if(piece !=nullptr) selectedPiece = boardPos;
+                
             }
 
             else {

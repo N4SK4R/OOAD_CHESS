@@ -1,4 +1,4 @@
-#include "pieces/RookMovement.h"
+#include "pieces/MovementStrategy.h"
 
 Board::Board() { Initialize(); }
 
@@ -10,6 +10,8 @@ void Board::Initialize() {
     squares[0][7] = Piece::PieceFactory(PieceType::ROOK, COLOUR::W, RookStrategy);
     squares[7][0] = Piece::PieceFactory(PieceType::ROOK, COLOUR::B, RookStrategy);
     squares[7][7] = Piece::PieceFactory(PieceType::ROOK, COLOUR::B, RookStrategy);
+
+    squares[0][1] = Piece::PieceFactory(PieceType::KNIGHT, COLOUR::W, RookStrategy);
 }
 
 void Board::MovePiece(Vector2 from, Vector2 to) {

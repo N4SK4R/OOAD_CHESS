@@ -7,7 +7,7 @@
 
 class MovementStrategy;
 
-enum class PieceType { ROOK };
+enum class PieceType { ROOK, KNIGHT };
 enum class COLOUR    { W, B };
 
 class Piece {
