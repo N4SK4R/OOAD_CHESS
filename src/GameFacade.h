@@ -2,13 +2,11 @@
 #define GAME_FACADE_H
 
 #include <raylib.h>
-#include "Board.h"
-#include "pieces/RookMovement.h"
+#include "pieces/Piece.h"
 
 class GameFacade {
     Board board;
     Vector2 selectedPiece = {-1, -1};
-    RookMovement rookMovement;
 
 public:
     void ProcessInput();

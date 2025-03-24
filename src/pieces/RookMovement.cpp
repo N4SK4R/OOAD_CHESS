@@ -1,10 +1,7 @@
 #include "RookMovement.h"
 #include <cmath>
 
-bool RookMovement::ValidateMove(const Board& board, 
-                              COLOUR playerColor,
-                              Vector2 from, 
-                              Vector2 to) const {
+bool RookMovement::ValidateMove(const Board& board, COLOUR playerColor,Vector2 from, Vector2 to) const {
     // Must move in straight line
     if(from.x != to.x && from.y != to.y) return false;
 

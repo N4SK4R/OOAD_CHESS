@@ -1,13 +1,15 @@
-#include "Board.h"
+#include "pieces/RookMovement.h"
 
 Board::Board() { Initialize(); }
 
 void Board::Initialize() {
 
-    squares[0][0] = Piece::PieceFactory(PieceType::ROOK, COLOUR::W);
-    squares[0][7] = Piece::PieceFactory(PieceType::ROOK, COLOUR::W);
-    squares[7][0] = Piece::PieceFactory(PieceType::ROOK, COLOUR::B);
-    squares[7][7] = Piece::PieceFactory(PieceType::ROOK, COLOUR::B);
+    std::shared_ptr<MovementStrategy> RookStrategy=std::make_shared<RookMovement>();
+
+    squares[0][0] = Piece::PieceFactory(PieceType::ROOK, COLOUR::W, RookStrategy);
+    squares[0][7] = Piece::PieceFactory(PieceType::ROOK, COLOUR::W, RookStrategy);
+    squares[7][0] = Piece::PieceFactory(PieceType::ROOK, COLOUR::B, RookStrategy);
+    squares[7][7] = Piece::PieceFactory(PieceType::ROOK, COLOUR::B, RookStrategy);
 }
 
 void Board::MovePiece(Vector2 from, Vector2 to) {

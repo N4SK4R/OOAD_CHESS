@@ -8,10 +8,7 @@ class Board;
 class MovementStrategy {
 public:
     virtual ~MovementStrategy() = default;
-    virtual bool ValidateMove(const Board& board, 
-                            COLOUR playerColor,
-                            Vector2 from, 
-                            Vector2 to) const = 0;
+    virtual bool ValidateMove(const Board& board, COLOUR playerColor,Vector2 from, Vector2 to) const = 0;
 };
 
 #endif 

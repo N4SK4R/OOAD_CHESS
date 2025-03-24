@@ -3,7 +3,10 @@
 
 #include <array>
 #include <memory>
-#include "pieces/Piece.h"
+#include <raylib.h>
+
+class Piece; // Forward declaration instead of including Piece.h
+
 
 class Board {
     static const int BOARD_SIZE = 8;

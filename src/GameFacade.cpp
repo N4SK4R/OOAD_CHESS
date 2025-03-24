@@ -25,8 +25,7 @@ void GameFacade::ProcessInput() {
             else {
                 Piece* selected = board.GetPiece(selectedPiece);
 
-
-                if(rookMovement.ValidateMove(board, selected->GetColor(), selectedPiece, boardPos)) {
+                if(selected->validateMove(board, selectedPiece, boardPos)) {
                     std::cout << "Valid move!" << std::endl;
 
                     board.MovePiece(selectedPiece, boardPos);   
