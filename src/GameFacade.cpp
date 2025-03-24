@@ -13,6 +13,7 @@ void GameFacade::ProcessInput() {
                   << "Board position: (" << boardPos.x << ", " << boardPos.y << ")" << std::endl;
 
         if(boardPos.x >= 0 && boardPos.x < 8 && boardPos.y >= 0 && boardPos.y < 8) {
+
             if(selectedPiece.x == -1) { 
 
                 Piece* piece = board.GetPiece(boardPos);
@@ -23,6 +24,12 @@ void GameFacade::ProcessInput() {
             else {
                 Piece* selected = board.GetPiece(selectedPiece);
 
+                if(selected->GetType()==PieceType::PAWN) {
+
+                    int promotionRow = (selected->GetColor() == COLOUR::W) ? 7 : 0;
+                    if(boardPos.y == promotionRow) std::cout << "Promotion!!\n";
+                }
+                
                 if(selected->validateMove(board, selectedPiece, boardPos)) {
                     std::cout << "Valid move!" << std::endl;
 
@@ -42,9 +49,14 @@ void GameFacade::Render() const {
     ClearBackground(RAYWHITE);
     board.Draw();
     
-    if(selectedPiece.x != -1) {
+    if(selectedPiece.x != -1)
         DrawRectangleLines(selectedPiece.x*100+10, selectedPiece.y*100+10, 80, 80, YELLOW);
-    }
     
     EndDrawing();
+}
+
+void GameFacade::ShowPromotionMenu() {
+
+    DrawRectangle(350, 360, 100, 60, LIGHTGRAY);
+    
 }

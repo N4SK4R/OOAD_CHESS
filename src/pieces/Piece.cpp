@@ -1,5 +1,10 @@
 #include "Rook.cpp"
 #include "Knight.cpp"
+#include "Bishop.cpp"
+#include "Queen.cpp"
+#include "King.cpp"
+#include "Pawn.cpp"
+
 
 BasePiece::BasePiece(COLOUR c, const std::string& texturecolor_path, std::shared_ptr<MovementStrategy> strategy)
     : color(c), movementStrategy(strategy) 
@@ -23,9 +28,19 @@ std::unique_ptr<Piece> Piece::PieceFactory(PieceType type, COLOUR color, std::sh
 
     switch(type) {
         case PieceType::ROOK: 
-            return std::make_unique<Rook>(color, path+"r.png", sharedStrategy);
+            return std::make_unique<Rook>(color, path + "r.png", sharedStrategy);
         case PieceType::KNIGHT: 
-            return std::make_unique<Knight>(color, path+"n.png", sharedStrategy);
-        default: return nullptr;
+            return std::make_unique<Knight>(color, path + "n.png", sharedStrategy);
+        case PieceType::BISHOP: 
+            return std::make_unique<Bishop>(color, path + "b.png", sharedStrategy);
+        case PieceType::QUEEN: 
+            return std::make_unique<Queen>(color, path + "q.png", sharedStrategy);
+        case PieceType::KING: 
+            return std::make_unique<King>(color, path + "k.png", sharedStrategy);
+        case PieceType::PAWN: 
+            return std::make_unique<Pawn>(color, path + "p.png", sharedStrategy);
+        default: 
+            return nullptr;
     }
+    
 }
