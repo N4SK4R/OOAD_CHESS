@@ -11,4 +11,5 @@ make PLATFORM=PLATFORM_DESKTOP # To make the static version.
 sudo make install # Static version.
 
 ```
-Refactor code is in refactor branch
+`make` to build
+`./chess` to run
