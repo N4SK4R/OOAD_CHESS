@@ -14,6 +14,7 @@ class Board {
 
 public:
     Board();
+    Board(const Board& CurrentBoard);
     void Initialize();
     void MovePiece(Vector2 from, Vector2 to);
     Piece* GetPiece(Vector2 position) const;

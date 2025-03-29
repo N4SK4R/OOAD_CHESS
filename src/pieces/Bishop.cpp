@@ -7,4 +7,8 @@ class Bishop : public BasePiece {
     
         PieceType GetType() const override { return PieceType::BISHOP; }
         COLOUR GetColor() const override { return color; }
+
+        std::unique_ptr<Piece> clone() const override{
+            return std::make_unique<Bishop>(*this);
+        }
     };

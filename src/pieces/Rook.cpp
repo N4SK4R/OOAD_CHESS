@@ -7,4 +7,8 @@ class Rook : public BasePiece {
     
         PieceType GetType() const override { return PieceType::ROOK; }
         COLOUR GetColor() const override { return color; }
+
+        std::unique_ptr<Piece> clone() const override{
+            return std::make_unique<Rook>(*this);
+        }
     };

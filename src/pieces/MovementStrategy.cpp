@@ -1,7 +1,7 @@
 #include "MovementStrategy.h"
 #include <cmath>
 
-bool RookMovement::ValidateMove(const Board& board, COLOUR playerColor,Vector2 from, Vector2 to) const {
+bool RookMovement::ValidateMove(Board& board, COLOUR playerColor,Vector2 from, Vector2 to) const {
     // Must move in straight line
     if(from.x != to.x && from.y != to.y) return false;
 
@@ -20,7 +20,7 @@ bool RookMovement::ValidateMove(const Board& board, COLOUR playerColor,Vector2 f
     return !target || target->GetColor() != playerColor;
 }
 
-bool KnightMovement::ValidateMove(const Board& board, COLOUR playerColor,Vector2 from, Vector2 to) const {
+bool KnightMovement::ValidateMove(Board& board, COLOUR playerColor,Vector2 from, Vector2 to) const {
     // Calculate absolute differences
     int dx = abs(to.x - from.x);
     int dy = abs(to.y - from.y);
@@ -35,7 +35,7 @@ bool KnightMovement::ValidateMove(const Board& board, COLOUR playerColor,Vector2
     return !target || target->GetColor() != playerColor;
 }
 
-bool BishopMovement::ValidateMove(const Board& board, COLOUR playerColor,Vector2 from, Vector2 to) const {
+bool BishopMovement::ValidateMove(Board& board, COLOUR playerColor,Vector2 from, Vector2 to) const {
     // Calculate absolute differences
     int dx = abs(to.x - from.x);
     int dy = abs(to.y - from.y);
@@ -59,7 +59,7 @@ bool BishopMovement::ValidateMove(const Board& board, COLOUR playerColor,Vector2
     return !target || target->GetColor() != playerColor;
 }
 
-bool QueenMovement::ValidateMove(const Board& board, COLOUR playerColor,Vector2 from, Vector2 to) const {
+bool QueenMovement::ValidateMove(Board& board, COLOUR playerColor,Vector2 from, Vector2 to) const {
     // Calculate movement differences
     int dx = abs(to.x - from.x);
     int dy = abs(to.y - from.y);
@@ -88,11 +88,57 @@ bool QueenMovement::ValidateMove(const Board& board, COLOUR playerColor,Vector2 
     return !target || target->GetColor() != playerColor;
 }
 
-bool KingMovement::ValidateMove(const Board& board, COLOUR playerColor,Vector2 from, Vector2 to) const {
+bool KingMovement::ValidateMove(Board& board, COLOUR playerColor,Vector2 from, Vector2 to) const {
+
+    int dx = abs(to.x - from.x);
+    int dy = abs(to.y - from.y);
+
+    if (dx <= 1 && dy <= 1) {
+        Piece* target = board.GetPiece(to);
+        return !target || target->GetColor() != playerColor;
+    }
+
+    if (dy == 0 && dx == 2 && from.y == (playerColor == COLOUR::W ? 0 : 7)) {
+
+        // Kingside castle
+        if (to.x > from.x) {
+            Vector2 rookPos =  {7, from.y};
+            Vector2 between1 = {5, from.y};
+            Vector2 between2 = {6, from.y};
+            
+            Piece* rook = board.GetPiece(rookPos);
+
+            if (rook && rook->GetType() == PieceType::ROOK
+            && !board.GetPiece(between1) && !board.GetPiece(between2))
+            {
+                board.MovePiece(rookPos, between1); 
+                return true;
+            }
+             
+        }
+
+        // Queenside castle
+        else if (to.x < from.x) {
+            Vector2 rookPos =  {0, from.y};
+            Vector2 between1 = {1, from.y};
+            Vector2 between2 = {2, from.y};
+            Vector2 between3 = {3, from.y};
+            
+            Piece* rook = board.GetPiece(rookPos);
+
+            if (rook && rook->GetType() == PieceType::ROOK
+            && !board.GetPiece(between1) && !board.GetPiece(between2) && !board.GetPiece(between3))
+            {
+                board.MovePiece(rookPos, between3); 
+                return true;
+            }
+                   
+        }
+    }
     return false;
 }
 
-bool PawnMovement::ValidateMove(const Board& board, COLOUR playerColor,Vector2 from, Vector2 to) const {
+bool PawnMovement::ValidateMove(Board& board, COLOUR playerColor,Vector2 from, Vector2 to) const {
 
     int direction = (playerColor == COLOUR::W) ? 1 : -1;
     int startRow = (playerColor == COLOUR::W) ? 1 : 6;

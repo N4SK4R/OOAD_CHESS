@@ -63,3 +63,13 @@ void Board::Draw() const {
         }
     }
 }
+
+Board::Board(const Board& CurrentBoard) { 
+    for (int i = 0; i < BOARD_SIZE; i++) {
+        for (int j = 0; j < BOARD_SIZE; j++) {
+            if (CurrentBoard.squares[i][j]) {
+                squares[i][j] = CurrentBoard.squares[i][j]->clone();
+            }
+        }
+    }
+}
