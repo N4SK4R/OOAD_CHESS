@@ -98,7 +98,7 @@ bool KingMovement::ValidateMove(Board& board, COLOUR playerColor,Vector2 from, V
         return !target || target->GetColor() != playerColor;
     }
 
-    if (dy == 0 && dx == 2 && from.y == (playerColor == COLOUR::W ? 0 : 7)) {
+    if (dy == 0 && dx == 2 && from.y == (playerColor == COLOUR::W ? 7 : 0)) {
 
         // Kingside castle
         if (to.x > from.x) {
@@ -140,8 +140,8 @@ bool KingMovement::ValidateMove(Board& board, COLOUR playerColor,Vector2 from, V
 
 bool PawnMovement::ValidateMove(Board& board, COLOUR playerColor,Vector2 from, Vector2 to) const {
 
-    int direction = (playerColor == COLOUR::W) ? 1 : -1;
-    int startRow = (playerColor == COLOUR::W) ? 1 : 6;
+    int direction = (playerColor == COLOUR::W) ? -1 : 1;
+    int startRow = (playerColor == COLOUR::W) ? 6 : 1;
 
     if (from.x == to.x) {
         

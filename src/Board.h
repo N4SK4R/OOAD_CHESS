@@ -13,9 +13,9 @@ class Board {
     std::array<std::array<std::unique_ptr<Piece>, BOARD_SIZE>, BOARD_SIZE> squares;
 
 public:
-    Board();
+    Board(int theme);
     Board(const Board& CurrentBoard);
-    void Initialize();
+    void Initialize(int theme);
     void MovePiece(Vector2 from, Vector2 to);
     Piece* GetPiece(Vector2 position) const;
     void Draw() const;

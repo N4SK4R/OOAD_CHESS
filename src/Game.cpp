@@ -1,7 +1,7 @@
-#include "GameFacade.h"
+#include "Game.h"
 #include <iostream>
 
-void GameFacade::ProcessInput() {
+void Game::ProcessInput() {
     if(!gameOver && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
 
         Vector2 mousePos = GetMousePosition();
@@ -50,7 +50,7 @@ void GameFacade::ProcessInput() {
     }
 }
 
-bool GameFacade::IsKingInCheck(Board& TestBoard, Vector2 TempKingPos) {
+bool Game::IsKingInCheck(Board& TestBoard, Vector2 TempKingPos) {
 
     Vector2 kingPos=(currentPlayer == COLOUR::W) ? WhiteKing : BlackKing;
 
@@ -70,7 +70,7 @@ bool GameFacade::IsKingInCheck(Board& TestBoard, Vector2 TempKingPos) {
     return false;
 }
 
-bool GameFacade::IsCheckmate() {
+bool Game::IsCheckmate() {
 
     Vector2 DefaultKingPos={-1,-1};
     if (!IsKingInCheck(board,DefaultKingPos)) return false;
@@ -102,7 +102,7 @@ bool GameFacade::IsCheckmate() {
     return true; // No legal move found
 }
 
-void GameFacade::Render() const {
+void Game::Render() const {
     BeginDrawing();
     ClearBackground(RAYWHITE);
     board.Draw();
@@ -119,4 +119,4 @@ void GameFacade::Render() const {
     EndDrawing();
 }
 
-GameFacade::GameFacade() : selectedPosition{-1, -1}, BlackKing{4, 7}, WhiteKing{4, 0} {}
+Game::Game(int theme) : selectedPosition{-1, -1}, BlackKing{4, 0}, WhiteKing{4, 7}, board(theme){}

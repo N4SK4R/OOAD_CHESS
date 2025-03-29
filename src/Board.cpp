@@ -1,8 +1,8 @@
 #include "pieces/MovementStrategy.h"
 
-Board::Board() { Initialize(); }
+Board::Board(int theme) { Initialize(theme); }
 
-void Board::Initialize() {
+void Board::Initialize(int theme) {
     
     std::shared_ptr<MovementStrategy> RookStrategy = std::make_shared<RookMovement>();
     std::shared_ptr<MovementStrategy> KnightStrategy = std::make_shared<KnightMovement>();
@@ -11,35 +11,36 @@ void Board::Initialize() {
     std::shared_ptr<MovementStrategy> KingStrategy = std::make_shared<KingMovement>();
     std::shared_ptr<MovementStrategy> PawnStrategy = std::make_shared<PawnMovement>();
 
-    // White pieces
-    squares[0][0] = Piece::PieceFactory(PieceType::ROOK, COLOUR::W, RookStrategy);
-    squares[0][7] = Piece::PieceFactory(PieceType::ROOK, COLOUR::W, RookStrategy);
-    squares[0][1] = Piece::PieceFactory(PieceType::KNIGHT, COLOUR::W, KnightStrategy);
-    squares[0][6] = Piece::PieceFactory(PieceType::KNIGHT, COLOUR::W, KnightStrategy);
-    squares[0][2] = Piece::PieceFactory(PieceType::BISHOP, COLOUR::W, BishopStrategy);
-    squares[0][5] = Piece::PieceFactory(PieceType::BISHOP, COLOUR::W, BishopStrategy);
-    squares[0][3] = Piece::PieceFactory(PieceType::QUEEN, COLOUR::W, QueenStrategy);
-    squares[0][4] = Piece::PieceFactory(PieceType::KING, COLOUR::W, KingStrategy);
-
-    // White pawns
-    for (int i = 0; i < 8; i++) {
-        squares[1][i] = Piece::PieceFactory(PieceType::PAWN, COLOUR::W, PawnStrategy);
-    }
-
-    // Black pieces
-    squares[7][0] = Piece::PieceFactory(PieceType::ROOK, COLOUR::B, RookStrategy);
-    squares[7][7] = Piece::PieceFactory(PieceType::ROOK, COLOUR::B, RookStrategy);
-    squares[7][1] = Piece::PieceFactory(PieceType::KNIGHT, COLOUR::B, KnightStrategy);
-    squares[7][6] = Piece::PieceFactory(PieceType::KNIGHT, COLOUR::B, KnightStrategy);
-    squares[7][2] = Piece::PieceFactory(PieceType::BISHOP, COLOUR::B, BishopStrategy);
-    squares[7][5] = Piece::PieceFactory(PieceType::BISHOP, COLOUR::B, BishopStrategy);
-    squares[7][3] = Piece::PieceFactory(PieceType::QUEEN, COLOUR::B, QueenStrategy);
-    squares[7][4] = Piece::PieceFactory(PieceType::KING, COLOUR::B, KingStrategy);
+    // Black pieces 
+    squares[0][0] = Piece::PieceFactory(PieceType::ROOK, COLOUR::B, RookStrategy, theme);
+    squares[0][7] = Piece::PieceFactory(PieceType::ROOK, COLOUR::B, RookStrategy, theme);
+    squares[0][1] = Piece::PieceFactory(PieceType::KNIGHT, COLOUR::B, KnightStrategy, theme);
+    squares[0][6] = Piece::PieceFactory(PieceType::KNIGHT, COLOUR::B, KnightStrategy, theme);
+    squares[0][2] = Piece::PieceFactory(PieceType::BISHOP, COLOUR::B, BishopStrategy, theme);
+    squares[0][5] = Piece::PieceFactory(PieceType::BISHOP, COLOUR::B, BishopStrategy, theme);
+    squares[0][3] = Piece::PieceFactory(PieceType::QUEEN, COLOUR::B, QueenStrategy, theme);
+    squares[0][4] = Piece::PieceFactory(PieceType::KING, COLOUR::B, KingStrategy, theme);
 
     // Black pawns
     for (int i = 0; i < 8; i++) {
-        squares[6][i] = Piece::PieceFactory(PieceType::PAWN, COLOUR::B, PawnStrategy);
+        squares[1][i] = Piece::PieceFactory(PieceType::PAWN, COLOUR::B, PawnStrategy, theme);
     }
+
+    // White pieces
+    squares[7][0] = Piece::PieceFactory(PieceType::ROOK, COLOUR::W, RookStrategy, theme);
+    squares[7][7] = Piece::PieceFactory(PieceType::ROOK, COLOUR::W, RookStrategy, theme);
+    squares[7][1] = Piece::PieceFactory(PieceType::KNIGHT, COLOUR::W, KnightStrategy, theme);
+    squares[7][6] = Piece::PieceFactory(PieceType::KNIGHT, COLOUR::W, KnightStrategy, theme);
+    squares[7][2] = Piece::PieceFactory(PieceType::BISHOP, COLOUR::W, BishopStrategy, theme);
+    squares[7][5] = Piece::PieceFactory(PieceType::BISHOP, COLOUR::W, BishopStrategy, theme);
+    squares[7][3] = Piece::PieceFactory(PieceType::QUEEN, COLOUR::W, QueenStrategy, theme);
+    squares[7][4] = Piece::PieceFactory(PieceType::KING, COLOUR::W, KingStrategy, theme);
+
+    // White pawns
+    for (int i = 0; i < 8; i++) {
+        squares[6][i] = Piece::PieceFactory(PieceType::PAWN, COLOUR::W, PawnStrategy, theme);
+    }
+
 }
 
 void Board::MovePiece(Vector2 from, Vector2 to) {

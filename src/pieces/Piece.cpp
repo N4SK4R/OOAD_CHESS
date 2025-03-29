@@ -6,15 +6,15 @@
 #include "Pawn.cpp"
 
 BasePiece::BasePiece(COLOUR c, const std::string& texturecolor_path, std::shared_ptr<MovementStrategy> strategy)
-    : color(c), movementStrategy(strategy) 
+    : color(c), movementStrategy(strategy), theme(texturecolor_path[15])
     {texture = LoadTexture(texturecolor_path.c_str());}
 
 BasePiece::BasePiece(const BasePiece& other) 
     : color(other.color), movementStrategy(other.movementStrategy), ownsTexture(false) {}
 
 void BasePiece::Draw(Vector2 position) const {
-        float scale = 4;
-        //float scale = 0.36;
+
+        float scale = (theme==49) ? 0.36 : 4;
         DrawTextureEx(texture, position, 0.0f, scale, WHITE);
     }
 
@@ -24,10 +24,10 @@ bool BasePiece::validateMove(Board& board, Vector2 from, Vector2 to) {
 
 BasePiece::~BasePiece() { if(ownsTexture)UnloadTexture(texture);}
 
-std::unique_ptr<Piece> Piece::PieceFactory(PieceType type, COLOUR color, std::shared_ptr<MovementStrategy> sharedStrategy) {
+std::unique_ptr<Piece> Piece::PieceFactory(PieceType type, COLOUR color, std::shared_ptr<MovementStrategy> sharedStrategy, int theme) {
     
     std::string color_path = (color == COLOUR::W ? "w" : "b");
-    std::string path ="assets/textures2/" + color_path;
+    std::string path ="assets/textures"+ std::to_string(theme) +"/" + color_path;
 
     switch(type) {
         case PieceType::ROOK: 

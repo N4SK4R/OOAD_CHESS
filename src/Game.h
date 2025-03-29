@@ -1,10 +1,10 @@
-#ifndef GAME_FACADE_H
-#define GAME_FACADE_H
+#ifndef GAME_H
+#define GAME_H
 
 #include <raylib.h>
 #include "pieces/Piece.h"
 
-class GameFacade {
+class Game {
     
     Board board;
     Vector2 selectedPosition;
@@ -15,7 +15,7 @@ class GameFacade {
    
 public:
 
-    GameFacade();
+    Game(int theme);
     void ProcessInput();
     void Render() const;
     bool IsKingInCheck(Board& TestBoard, Vector2 TempKingPos);

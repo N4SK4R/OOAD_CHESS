@@ -1,4 +1,4 @@
-#include "GameFacade.h"
+#include "Game.h"
 #include <iostream>
 
 int main() {
@@ -9,17 +9,16 @@ int main() {
     std::cout << "-----------------------------\n";
     std::cout << "|    SELECT CHESS THEME     |\n";
     std::cout << "|---------------------------|\n";
-    std::cout << "|  1. Standard Theme           |\n";
-    std::cout << "|  2. Dark Theme            |\n";
+    std::cout << "|  1. Standard Theme        |\n";
+    std::cout << "|  2. New Theme             |\n";
     std::cout << "-----------------------------\n";
-    std::cout << "Enter your choice (1 or 2): ";
-    
+  
     std::cin >> theme;
     
     InitWindow(screenWidth, screenHeight, "Chess Game");
     SetTargetFPS(60);
 
-    GameFacade game;
+    Game game(theme);
 
     while (!WindowShouldClose()) {
 

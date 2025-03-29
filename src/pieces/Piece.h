@@ -19,7 +19,7 @@ public:
     virtual bool validateMove(Board& board,Vector2 from, Vector2 to) = 0;
     virtual std::unique_ptr<Piece> clone() const = 0;
 
-    static std::unique_ptr<Piece> PieceFactory(PieceType type, COLOUR color, std::shared_ptr<MovementStrategy> sharedStrategy);
+    static std::unique_ptr<Piece> PieceFactory(PieceType type, COLOUR color, std::shared_ptr<MovementStrategy> sharedStrategy, int theme);
 
 };
 
@@ -28,6 +28,7 @@ class BasePiece : public Piece {
         COLOUR color;
         Texture2D texture;
         std::shared_ptr<MovementStrategy> movementStrategy;
+        int theme;
         bool ownsTexture = true;
     
     public:
